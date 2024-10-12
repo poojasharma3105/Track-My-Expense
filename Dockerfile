@@ -4,14 +4,22 @@ FROM node:20.13.0
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy both the client and server package.json files
-COPY ./package*.json ./client/package*.json /app/client/
+# Copy package.json and package-lock.json for both root and client folder
+COPY package*.json ./
+COPY client/package*.json ./client/
 
-# Install dependencies
+# Set permissions for all files
+RUN chmod -R 755 /app
+
+# Install dependencies for both root and client
+RUN npm install
 RUN npm install --prefix client
 
-# Copy the rest of the client application code
-COPY ./client /app/client
+# Copy the rest of your application code
+COPY . .
+
+# Set permissions for the copied files
+RUN chmod -R 755 /app
 
 # Build the frontend
 RUN npm run build --prefix client
