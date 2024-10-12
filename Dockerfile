@@ -1,23 +1,23 @@
 # Use an official Node.js runtime as a parent image
 FROM node:20.13.0
 
-# Set the working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the container
-COPY package*.json ./
+# Copy both the client and server package.json files
+COPY ./package*.json ./client/package*.json /app/client/
 
 # Install dependencies
-RUN npm install
+RUN npm install --prefix client
 
-# Copy the application code
-COPY . .
+# Copy the rest of the client application code
+COPY ./client /app/client
 
 # Build the frontend
 RUN npm run build --prefix client
 
-# Expose the port the app runs on
+# Expose the port your app runs on
 EXPOSE 8080
 
-# Start the backend server
-CMD ["npm", "start"]
+# Command to run your app
+CMD ["npm", "run", "server"]
