@@ -6,9 +6,10 @@ WORKDIR /app
 
 # Copy package.json and package-lock.json files
 COPY package*.json ./
+COPY client/package*.json ./client/ # Ensure you also copy the client package.json
 
 # Install dependencies for both frontend and backend
-RUN npm install
+RUN npm install && npm install --prefix client
 
 # Copy the rest of your application code
 COPY . .
