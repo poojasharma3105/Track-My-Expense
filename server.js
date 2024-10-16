@@ -17,7 +17,7 @@ const app = express();
 // Middleware
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(cors());
+app.use(cors({origin: "https://track-my-expense-frontend.onrender.com"}));
 
 // API routes
 app.use("/users", require("./routes/user.js"));
