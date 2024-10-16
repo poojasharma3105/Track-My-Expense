@@ -1,13 +1,422 @@
-body {
+/* General Resets */
+* {
+  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* General Styles */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the body takes full height */
+  background-color: #f9f9f9; /* Light background for contrast */
+  font-family: 'Arial', sans-serif; /* Use a clean font */
+}
+
+/* Content Section */
+.content {
+  flex: 1; /* This allows the content area to take the available space */
+  padding: 20px; /* Space around the content */
+  background-color: #f2f4f8; /* Light background for a fresh look */
+}
+
+/* Navbar and Footer Styles */
+.navbar, .footer {
+  background-color: rgba(0, 0, 0, 0.8); /* Dark background for contrast */
+  color: white; /* White text color */
+  padding: 15px; /* Adjust padding */
+  text-align: center; /* Center text */
+}
+
+.footer {
+  height: 60px; /* Fixed height for the footer */
+}
+
+/* Header Styles */
+.navbar-brand {
+  font-weight: bold; /* Make the brand title bold */
+  font-size: 24px; /* Increase font size */
+}
+
+.user-name {
+  font-weight: 500; /* Semi-bold user name */
+  margin: 0; /* Remove default margin */
+}
+
+/* Button Styles */
+.btn, .logout-btn {
+  background-color: #81d4fa; /* Light blue button color */
+  color: white;
+  border: none;
+  padding: 12px 20px; /* Increased padding for better clickability */
+  border-radius: 10px; /* More rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+  font-size: 16px; /* Font size for the button */
+  width: auto; /* Adjust button width to auto */
+}
+
+.btn:hover, .logout-btn:hover {
+  background-color: #4fc3f7; /* Darker blue on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Register Page Styles */
+.register-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 90vh; /* Full height */
+  background: linear-gradient(to bottom right, #f0eaf5, #e3f2fd); /* Pastel gradient background */
+  padding: 20px;
+}
+
+/* Form Container */
+.form-container {
+  background: rgba(255, 255, 255, 0.95); /* Slightly more opaque for better contrast */
+  padding: 40px; /* More spacing around the form */
+  border-radius: 20px; /* More rounded corners */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); /* Deeper shadow for better depth */
+  width: 100%; /* Full width for responsiveness */
+  max-width: 450px; /* Limit max width */
+}
+
+/* Header */
+h1 {
+  margin-bottom: 30px;
+  color: #6d4c41; /* Soft brown color */
+  text-align: center; /* Center text */
+  font-size: 24px; /* Increase font size */
+}
+
+/* Filters Section */
+.filters {
+  display: flex; /* Ensure items are in a row */
+  justify-content: space-between; /* Space between items */
+  align-items: center;
+  padding: 20px; /* Add padding around the filters */
+  background: rgba(255, 255, 255, 0.9); /* Slightly opaque white background */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow */
+  margin-bottom: 20px; /* Space below the filters */
+}
+
+/* Filter Headings */
+.filters h6 {
+  margin: 0;
+  font-weight: bold;
+  color: #6d4c41; /* Soft brown color for headings */
+}
+
+/* Table Styles */
+.table, .ant-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #fff; /* White background for table */
+  border-radius: 10px; /* Rounded corners */
+  overflow: hidden; /* Prevents overflow from rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+.table th, .table td, .ant-table th, .ant-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd; /* Light border for rows */
+}
+
+.ant-table th {
+  background-color: #e3f2fd; /* Header background */
+  color: #6d4c41; /* Soft brown for header text */
+  font-weight: bold; /* Bold text for headers */
+}
+
+/* Table Row Hover Effect */
+.ant-table tr:hover {
+  background-color: #f0f0f0; /* Light gray on hover */
+}
+
+/* Modal Styles */
+.ant-modal {
+  border-radius: 10px; /* Rounded corners for modal */
+}
+
+.ant-modal-header {
+  background-color: #e3f2fd; /* Modal header background */
+  border-top-left-radius: 10px; /* Rounded corners */
+  border-top-right-radius: 10px; /* Rounded corners */
+}
+
+.ant-modal-title {
+  color: #6d4c41; /* Soft brown color for modal title */
+}
+
+/* Input and Select Styles */
+.ant-input,
+.ant-input-password, .ant-select-selector {
+  border-radius: 10px; /* More rounded corners */
+  border: 2px solid #b39ddb; /* Light lavender border for inputs */
+  padding: 12px; /* Increased padding for comfort */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transitions */
+}
+
+.ant-input:focus,
+.ant-input-password:focus, .ant-select-focused {
+  border-color: #9575cd; /* Medium lavender on focus */
+  box-shadow: 0 0 5px rgba(149, 117, 205, 0.5); /* Light shadow on focus */
+}
+
+/* Error Message Styles */
+.ant-form-item-explain {
+  color: red; /* Red for error messages */
+  margin-top: 5px; /* Space above error messages */
+  font-size: 12px; /* Smaller font size */
+}
+
+/* Ant Design Icons */
+.anticon svg {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.active-icon {
+  color: #007bff; /* Use a vibrant color for active icons */
+}
+
+.inactive-icon {
+  color: #b0b0b0; /* Light gray for inactive icons */
+}
+
+.switch-icon {
+  display: flex; /* Flex container for icons */
+  align-items: center; /* Center icons vertically */
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  padding: 10px 15px;
+}
+
+/* Loading spinner styles */
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column; /* Allow for stacking on smaller screens */
+  }
+
+  .filters > div {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+/* Additional Styles */
+.mx-2 {
+  margin: 0 8px; /* Horizontal margin for spacing */
+}
+
+/* Custom styling for the Header */
+.brand-title {
+  font-weight: bold;
+  font-size: 24px; /* Optional: increase the font size */
+}
+
+/* Additional styles to ensure alignment */
+.navbar {
+  display: flex; /* Make sure the navbar is a flex container */
+  justify-content: space-between; /* Space between brand and items */
+  align-items: center; /* Center items vertically */
+}
+/* General Resets */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Set height for html and body */
+html, body {
+  height: 100%; /* Make sure body and html fill the height */
+}
+
+/* Body Styles */
+body {
+  display: flex;               /* Set body as flex container */
+  flex-direction: column;      /* Arrange children vertically */
+  min-height: 100vh;           /* Body should fill the full height */
+  background-color: #f9f9f9;   /* Light background */
+  font-family: 'Arial', sans-serif; /* Clean font */
+}
+
+/* Layout Container */
+.layout {
+  display: flex;               /* Main layout as flex container */
+  flex-direction: column;      /* Arrange children vertically */
+  flex: 1;                     /* Allows layout to take full height */
+}
+
+/* Content Section */
+.content {
+  flex: 1;                     /* This makes the content fill available space */
+  padding: 20px;               /* Space around the content */
+  background-color: #f2f4f8;   /* Light background for content area */
+}
+
+/* Navbar Styles */
+.navbar {
+  background-color: rgba(0, 0, 0, 0.8); /* Dark navbar */
+  color: white;                       /* White text color */
+  padding: 15px;                      /* Padding for navbar */
+  text-align: center;                 /* Center text */
+}
+
+/* Footer Styles */
+.footer {
+  background-color: rgba(0, 0, 0, 0.8); /* Dark footer */
+  color: white;                       /* White text color */
+  padding: 15px;                      /* Padding for footer */
+  text-align: center !important;                 /* Center text */
+  height: 60px !important;                       /* Fixed height for footer */
+  margin-top: auto !important;              /* Push footer to the bottom */
+}
+/* styles.css */
+
+/* Register/Login Page Styles */
+.register-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh; /* Full viewport height */
+  background: linear-gradient(to bottom right, #f0eaf5, #e3f2fd); /* Light pastel gradient */
+  padding: 20px; /* Space around the content */
+}
+
+.login-form {
+  background: rgba(255, 255, 255, 0.95); /* Slightly opaque white background */
+  padding: 40px; /* Spacing around the form */
+  border-radius: 20px; /* Rounded corners */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+  width: 100%; /* Full width for responsiveness */
+  max-width: 450px; /* Limit max width */
+}
+
+/* Header Styles */
+.login-form h1 {
+  color: #6d4c41; /* Soft brown color */
+  margin-bottom: 30px; /* Space below the header */
+}
+
+/* Input Styles */
+.ant-input {
+  border-radius: 10px; /* Rounded corners */
+  border: 2px solid #b39ddb; /* Light lavender border */
+  padding: 12px; /* Increased padding for comfort */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition on focus */
+}
+
+.ant-input:focus {
+  border-color: #9575cd; /* Change border color on focus */
+  box-shadow: 0 0 5px rgba(149, 117, 205, 0.5); /* Shadow on focus */
+}
+
+/* Button Styles */
+.btn {
+  background-color: #81d4fa; /* Light blue background */
+  color: white; /* White text color */
+  border: none;
+  padding: 12px 20px; /* Increased padding */
+  border-radius: 10px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+}
+
+.btn:hover {
+  background-color: #4fc3f7; /* Darker blue on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Link Styles */
+.link {
+  color: #007bff; /* Bootstrap link color */
+}
+
+.link:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+/* styles.css */
+
+/* Register/Login Page Styles */
+.register-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh; /* Full viewport height */
+  background: linear-gradient(to bottom right, #f0eaf5, #e3f2fd); /* Light pastel gradient */
+  padding: 20px; /* Space around the content */
+}
+
+.register-form {
+  background: rgba(255, 255, 255, 0.95); /* Slightly opaque white background */
+  padding: 40px; /* Spacing around the form */
+  border-radius: 20px; /* Rounded corners */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+  width: 100%; /* Full width for responsiveness */
+  max-width: 450px; /* Limit max width */
+}
+
+/* Header Styles */
+.register-form h1 {
+  color: #6d4c41; /* Soft brown color */
+  margin-bottom: 30px; /* Space below the header */
+}
+
+/* Input Styles */
+.ant-input {
+  border-radius: 10px; /* Rounded corners */
+  border: 2px solid #b39ddb; /* Light lavender border */
+  padding: 12px; /* Increased padding for comfort */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition on focus */
+}
+
+.ant-input:focus {
+  border-color: #9575cd; /* Change border color on focus */
+  box-shadow: 0 0 5px rgba(149, 117, 205, 0.5); /* Shadow on focus */
+}
+
+/* Button Styles */
+.btn {
+  background-color: #81d4fa; /* Light blue background */
+  color: white; /* White text color */
+  border: none;
+  padding: 12px 20px; /* Increased padding */
+  border-radius: 10px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+}
+
+.btn:hover {
+  background-color: #4fc3f7; /* Darker blue on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Link Styles */
+.link {
+  color: #007bff; /* Bootstrap link color */
+}
+
+.link:hover {
+  text-decoration: underline; /* Underline on hover */
 }
