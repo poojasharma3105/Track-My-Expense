@@ -2,46 +2,42 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
-const colors = require("colors");
 const connectDb = require("./config/connectDb");
 const path = require("path");
 
-//config dot env file
+// Config dot env file
 dotenv.config();
 
-//database call
+// Database call
 connectDb();
 
-//rest object
+// Create an express app
 const app = express();
 
-//middlewares
+// Middleware
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cors());
 
-//routes
-//user routes
+// API routes
 app.use("/users", require("./routes/user.js"));
-
-//transaction routes
 app.use("/transactions", require("./routes/transaction.js"));
 
-// ======= Serve Static React App =======
+// Serve static files in production
 if (process.env.NODE_ENV === "production") {
-  // Set static folder (serves React build files)
+  // Serve static files from the client/build folder
   app.use(express.static(path.join(__dirname, "client/build")));
 
-  // Catch-all route to serve index.html for any unknown route
+  // All other GET requests that are not API routes should return the React app's index.html
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client/build", "index.html"));
   });
 }
 
-//port
+// Define the PORT
 const PORT = process.env.PORT || 8080;
 
-//listen server
+// Start the server
 app.listen(PORT, () => {
-    console.log(`Server listening to port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
