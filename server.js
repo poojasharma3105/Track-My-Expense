@@ -27,6 +27,17 @@ app.use("/users", require("./routes/user.js"));
 //transaction routes
 app.use("/transactions", require("./routes/transaction.js"));
 
+// ======= Serve Static React App =======
+if (process.env.NODE_ENV === "production") {
+  // Set static folder (serves React build files)
+  app.use(express.static(path.join(__dirname, "client/build")));
+
+  // Catch-all route to serve index.html for any unknown route
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client/build", "index.html"));
+  });
+}
+
 //port
 const PORT = process.env.PORT || 8080;
 
