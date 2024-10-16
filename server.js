@@ -28,10 +28,6 @@ if (process.env.NODE_ENV === "production") {
   // Serve static files from the client/build folder
   app.use(express.static(path.join(__dirname, "client/build")));
 
-  // All other GET requests that are not API routes should return the React app's index.html
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client/build", "index.html"));
-  });
 }
 
 // Define the PORT
