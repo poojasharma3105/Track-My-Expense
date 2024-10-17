@@ -134,6 +134,7 @@ const HomePage = () => {
     } catch (error) {
       setLoading(false);
       message.error("Something went wrong");
+      console.error("Error details:", error);
     }
   };
 

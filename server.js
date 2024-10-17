@@ -17,18 +17,18 @@ const app = express();
 // Middleware
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(cors({ origin: "https://track-my-expense-frontend.onrender.com" }));
+app.use(cors());
 
 // API routes
 app.use("/users", require("./routes/user.js"));
 app.use("/transactions", require("./routes/transaction.js"));
 
 // Serve static files in production
-if (process.env.NODE_ENV === "production") {
-  // Serve static files from the client/build folder
-  app.use(express.static(path.join(__dirname, "client")));
+  app.use(express.static(path.join(__dirname, "./client/build")));
 
-}
+  app.get("*", function(req, res){
+    res.sendFile(path.join(__dirname, "./client/build/index.html"));
+  });
 
 // Define the PORT
 const PORT = process.env.PORT || 8080;

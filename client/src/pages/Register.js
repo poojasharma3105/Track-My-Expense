@@ -1,4 +1,3 @@
-// Register.js
 import React, { useState, useEffect } from "react";
 import { Form, Input, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,13 +12,15 @@ const Register = () => {
   const submitHandler = async (values) => {
     try {
       setLoading(true);
+      console.log("Submitting values:", values); 
       await axios.post("/users/register", values);
       message.success("Registration Successful");
       setLoading(false);
       navigate("/login");
     } catch (error) {
       setLoading(false);
-      message.error("Something went wrong");
+      const errorMsg = error.response?.data?.message || "Something went wrong";
+      message.error(errorMsg);
     }
   };
 
@@ -45,20 +46,28 @@ const Register = () => {
         <Form.Item
           label="Email"
           name="email"
-          rules={[{ required: true, message: "Please input your email!" }]}
+          rules={[
+            { required: true, message: "Please input your email!" },
+            { type: "email", message: "Please enter a valid email!" },
+          ]}
         >
           <Input type="email" placeholder="Enter your email" />
         </Form.Item>
         <Form.Item
           label="Password"
           name="password"
-          rules={[{ required: true, message: "Please input your password!" }]}
+          rules={[
+            { required: true, message: "Please input your password!" },
+            { min: 6, message: "Password must be at least 6 characters long!" },
+          ]}
         >
           <Input type="password" placeholder="Enter your password" />
         </Form.Item>
         <div className="d-flex justify-content-between align-items-center">
           <Link to="/login">Already registered? Click here to login</Link>
-          <button className="btn btn-primary" type="submit">Register</button>
+          <button className="btn btn-primary" type="submit" disabled={loading}>
+            {loading ? "Registering..." : "Register"}
+          </button>
         </div>
       </Form>
     </div>

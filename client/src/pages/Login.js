@@ -8,12 +8,12 @@ import Spinner from "../components/Spinner";
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+  
   // Handle form submission
   const submitHandler = async (values) => {
     try {
       setLoading(true);
-      const { data } = await axios.post("/users/login", values);
+      const { data } = await axios.post(`/users/login`, values);
       setLoading(false);
       message.success("Login successful");
       localStorage.setItem("user", JSON.stringify({ ...data.user, password: "" }));
