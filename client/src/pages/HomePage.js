@@ -22,6 +22,8 @@ const HomePage = () => {
   const [type, setType] = useState("all");
   const [viewData, setViewData] = useState("table");
   const [editable, setEditable] = useState(null);
+  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+
 
   // Table format
   const columns = [
@@ -70,7 +72,7 @@ const HomePage = () => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
       setLoading(true);
-      const res = await axios.post("/transactions/get-transaction", {
+      const res = await axios.post(`${API_URL}/transactions/get-transaction`, {
         userid: user._id,
         frequency,
         selectedDate,
@@ -84,7 +86,7 @@ const HomePage = () => {
       message.error("Something went wrong");
       console.log(error);
     }
-  }, [frequency, selectedDate, type]);
+  }, [frequency, selectedDate, type, API_URL]);
 
   // useEffect Hook
   useEffect(() => {
@@ -97,7 +99,7 @@ const HomePage = () => {
       const user = JSON.parse(localStorage.getItem("user"));
       setLoading(true);
       if (editable) {
-        await axios.post("/transactions/edit-transaction", {
+        await axios.post(`${API_URL}/transactions/edit-transaction`, {
           payload: {
             ...values,
             userId: user._id,
@@ -107,7 +109,7 @@ const HomePage = () => {
         setLoading(false);
         message.success("Transaction updated successfully");
       } else {
-        await axios.post("/transactions/add-transaction", {
+        await axios.post(`${API_URL}/transactions/add-transaction`, {
           ...values,
           userid: user._id,
         });
@@ -127,7 +129,7 @@ const HomePage = () => {
   const handleDelete = async (id) => {
     try {
       setLoading(true);
-      await axios.post("/transactions/delete-transaction", { transactionId: id });
+      await axios.post(`${API_URL}/transactions/delete-transaction`, { transactionId: id });
       message.success("Transaction deleted successfully");
       setLoading(false);
       getAllTransactions(); // Refresh after deleting

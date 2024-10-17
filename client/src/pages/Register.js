@@ -7,13 +7,14 @@ import Spinner from "../components/Spinner";
 const Register = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
   // Handle form submission
   const submitHandler = async (values) => {
     try {
       setLoading(true);
       console.log("Submitting values:", values); 
-      await axios.post("/users/register", values);
+      await axios.post(`${API_URL}/users/register`, values);
       message.success("Registration Successful");
       setLoading(false);
       navigate("/login");

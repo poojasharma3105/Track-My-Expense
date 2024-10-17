@@ -8,12 +8,14 @@ import Spinner from "../components/Spinner";
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+
   
   // Handle form submission
   const submitHandler = async (values) => {
     try {
       setLoading(true);
-      const { data } = await axios.post(`/users/login`, values);
+      const { data } = await axios.post(`${API_URL}/users/login`, values);
       setLoading(false);
       message.success("Login successful");
       localStorage.setItem("user", JSON.stringify({ ...data.user, password: "" }));
