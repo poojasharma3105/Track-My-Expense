@@ -24,10 +24,10 @@ app.use("/users", require("./routes/user.js"));
 app.use("/transactions", require("./routes/transaction.js"));
 
 // Serve static files in production
-  app.use(express.static(path.join(__dirname, "./client/build")));
+  app.use(express.static(path.join(__dirname, "../client/build")));
 
   app.get("*", function(req, res){
-    res.sendFile(path.join(__dirname, "./client/build/index.html"));
+    res.sendFile(path.join(__dirname, "../client/build/index.html"));
   });
 
 // Define the PORT
