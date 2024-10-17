@@ -27,7 +27,7 @@ app.use("/transactions", require("./routes/transaction.js"));
   app.use(express.static(path.join(__dirname, "../client/build")));
 
   app.get("*", function(req, res){
-    res.sendFile(path.join(__dirname, "./../client/build/index.html"));
+    res.sendFile(path.join(__dirname, "../client/build" , "index.html"));
   });
 
 // Define the PORT
