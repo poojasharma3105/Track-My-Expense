@@ -12,8 +12,8 @@ Live link to test: https://track-my-expense-1.onrender.com
 ## Tech Stack
 
 - **Frontend**: React.js
-- **Backend**: (If applicable)
-- **Database**: (If applicable)
+- **Backend**: Node.js
+- **Database**: MongoDB
 - **Deployment**: Render
 
 ## Setup
@@ -21,7 +21,6 @@ Live link to test: https://track-my-expense-1.onrender.com
 ### Prerequisites
 
 - Node.js and npm
-- (Any other tools/libraries you are using)
 
 ### Installation
 
@@ -29,7 +28,7 @@ Live link to test: https://track-my-expense-1.onrender.com
    git clone <repository-url>
    
 2. Navigate to the project directory:
-   cd <project-directory>
+   cd Track-my-expense
 
 3. Install dependencies:
    npm install
