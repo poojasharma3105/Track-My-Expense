@@ -25,7 +25,7 @@ Live link to test: https://track-my-expense-1.onrender.com
 ### Installation
 
 1. Clone the repository:
-   git clone <repository-url>
+   git clone repository-url
    
 2. Navigate to the project directory:
    cd Track-my-expense
