@@ -1,11 +1,12 @@
-// Footer.js
-import React from 'react';
+import React from "react";
 
 const Footer = () => {
   return (
-    <div className="bg-dark text-light text-center py-3 footer">
-      <h6 className="text-center">All rights reserved &copy;</h6>
-    </div>
+    <footer className="bg-dark text-light text-center py-3 mt-auto">
+      <div className="container">
+        <h6 className="mb-0">All rights reserved &copy; {new Date().getFullYear()}</h6>
+      </div>
+    </footer>
   );
 };
 

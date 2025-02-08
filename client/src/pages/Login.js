@@ -1,4 +1,3 @@
-// Login.js
 import React, { useState, useEffect } from "react";
 import { Form, Input, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,7 +9,6 @@ const Login = () => {
   const navigate = useNavigate();
   const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
-  
   // Handle form submission
   const submitHandler = async (values) => {
     try {
@@ -22,7 +20,7 @@ const Login = () => {
       navigate("/");
     } catch (error) {
       setLoading(false);
-      message.error("Something went wrong");
+      message.error("Invalid credentials. Please try again.");
     }
   };
 
@@ -34,21 +32,33 @@ const Login = () => {
   }, [navigate]);
 
   return (
-    <div className="register-page">
+    <div className="d-flex vh-100 justify-content-center align-items-center bg-light">
       {loading && <Spinner />}
-      <Form layout="vertical" onFinish={submitHandler} className="login-form">
-        <h1 className="text-center">Login Form</h1>
-        <Form.Item label="Email" name="email" rules={[{ required: true, message: "Please input your email!" }]}>
-          <Input type="email" placeholder="Enter your email" />
-        </Form.Item>
-        <Form.Item label="Password" name="password" rules={[{ required: true, message: "Please input your password!" }]}>
-          <Input type="password" placeholder="Enter your password" />
-        </Form.Item>
-        <div className="d-flex justify-content-between align-items-center">
-          <Link to="/register">Not a user? Click here to register</Link>
-          <button className="btn btn-primary" type="submit">Login</button>
+      <div className="card shadow-lg p-4 rounded-4" style={{ width: "400px" }}>
+        <div className="card-body">
+          <h3 className="text-center fw-bold mb-4">Login</h3>
+          <Form layout="vertical" onFinish={submitHandler}>
+            <Form.Item 
+              label="Email" 
+              name="email" 
+              rules={[{ required: true, message: "Please enter your email!" }]}
+            >
+              <Input type="email" placeholder="Enter your email" className="form-control" />
+            </Form.Item>
+            <Form.Item 
+              label="Password" 
+              name="password" 
+              rules={[{ required: true, message: "Please enter your password!" }]}
+            >
+              <Input type="password" placeholder="Enter your password" className="form-control" />
+            </Form.Item>
+            <button className="btn btn-primary w-100 mt-2" type="submit">Login</button>
+          </Form>
+          <div className="text-center mt-3">
+            <Link to="/register">Not a user? Register here</Link>
+          </div>
         </div>
-      </Form>
+      </div>
     </div>
   );
 };
